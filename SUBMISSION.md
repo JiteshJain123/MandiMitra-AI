@@ -6,7 +6,7 @@
 
 | | |
 |---|---|
-| Source code | https://github.com/JiteshJain123/MandiMitra-AI (the repository is currently **private**; give reviewers access or make it public before submitting) |
+| Source code | https://github.com/JiteshJain123/MandiMitra-AI (public repository) |
 | Live site | _to be added after deployment_ |
 | Live API health | _to be added after deployment_ (`/api/health`) |
 | One-page pitch (required by the form) | [PITCH.md](PITCH.md) |
