@@ -1,0 +1,59 @@
+@import 'tailwindcss';
+@import '@fontsource/ibm-plex-sans/400.css';
+@import '@fontsource/ibm-plex-sans/500.css';
+@import '@fontsource/ibm-plex-sans/600.css';
+@import '@fontsource/ibm-plex-sans-devanagari/400.css';
+@import '@fontsource/ibm-plex-sans-devanagari/600.css';
+@import '@fontsource-variable/bricolage-grotesque';
+
+@theme {
+  --font-sans: 'IBM Plex Sans', 'IBM Plex Sans Devanagari', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Bricolage Grotesque Variable', 'IBM Plex Sans', sans-serif;
+
+  --color-paper: #ffffff;
+  --color-mist: #f3f6f3;
+  --color-line: #dfe6e0;
+  --color-ink: #16201a;
+  --color-ink-soft: #4b5a50;
+  --color-ink-faint: #637166;
+
+  --color-mandi-50: #eef7f1;
+  --color-mandi-100: #d6ecdd;
+  --color-mandi-200: #aed8bd;
+  --color-mandi-500: #1f7a4d;
+  --color-mandi-700: #14532d;
+  --color-mandi-800: #0f4023;
+  --color-mandi-900: #0b2f1a;
+
+  --color-turmeric-50: #fdf6e3;
+  --color-turmeric-500: #c98a12;
+  --color-turmeric-700: #8a5d06;
+
+  --color-ledger-50: #fdf0ee;
+  --color-ledger-500: #b42318;
+  --color-ledger-700: #8a1a12;
+
+  --radius-slip: 14px;
+}
+
+@layer base {
+  html { color: var(--color-ink); background: var(--color-mist); -webkit-font-smoothing: antialiased; }
+  body { font-family: var(--font-sans); }
+  :focus-visible { outline: 2px solid var(--color-mandi-500); outline-offset: 2px; }
+  .tabular { font-variant-numeric: tabular-nums; }
+}
+
+/* The ruled "parchi" (sale slip) – the one signature surface in the product. */
+@utility slip-ruled {
+  background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 43px, var(--color-line) 43px, var(--color-line) 44px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+@keyframes ink-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+.ink-in { animation: ink-in 320ms ease-out both; }
+
+@keyframes pulse-ring { 0% { box-shadow: 0 0 0 0 rgb(180 35 24 / 0.35); } 100% { box-shadow: 0 0 0 18px rgb(180 35 24 / 0); } }
+.recording-pulse { animation: pulse-ring 1.4s ease-out infinite; }
