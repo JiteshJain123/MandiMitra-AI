@@ -165,6 +165,17 @@ Open http://localhost:5173 and click **Try the demo account**, or register. The 
 
 Full stack in Docker: `docker compose up --build`, then open http://localhost:8080.
 
+### Troubleshooting
+
+| Symptom | Likely cause and fix |
+|---|---|
+| The header says "Gnani AI not configured", or voice calls return `503 GNANI_NOT_CONFIGURED` | `GNANI_API_KEY` is empty in `apps/api/.env`. Set it and restart the API. |
+| The API does not start, or the health check shows the database as down | `MONGODB_URI` is wrong or MongoDB is not running. Run `npm run doctor` for a secret-safe check; for Atlas, allow your network address. |
+| The microphone does not work | The page must be on `localhost` or HTTPS, and the browser permission must be allowed. Use **Upload audio** or **Enter manually** meanwhile. |
+| The page cannot reach the API | In development Vite proxies `/api` to port 4000, so start the API first. For a separate frontend host, `CORS_ORIGINS` must contain its exact origin. |
+| Sign-in returns 429 | Sign-in is limited to 20 attempts per 15 minutes per address. Wait, or restart the API in development. |
+| Port 4000 or 5173 is already in use | Change `PORT` in `apps/api/.env`, or stop the other process. |
+
 ## Gnani AI integration
 
 All Gnani calls happen on the backend. The key is read from `GNANI_API_KEY` and is never sent to the browser, logged, or returned in responses. Logs redact any field named like a key, token or password.
