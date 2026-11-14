@@ -2,11 +2,58 @@
 
 **Your voice. Your transactions. Your digital records.**
 
-Author: Jitesh Jain, built for the Great Indian AI Internship Challenge.
+Author: Jitesh Jain, built for the Great Indian AI Internship Challenge. Developed with AI coding assistance.
 
 MandiMitra AI is a voice-first transaction assistant for farmers, traders and mandi workers in India. You speak a sale in Hindi, Hinglish or English. The app transcribes it with **Gnani Prisma**, fills in a sale slip, calculates commission and deductions to the paisa on the server, reads the result back with **Gnani Timbre**, and saves it only after you confirm. It then issues a receipt and tracks the payment until it is paid.
 
-![Landing page](docs/screenshots/landing.png)
+**Status:** runs locally (see [Installation](#installation)). A deployment guide is provided in [DEPLOYMENT.md](DEPLOYMENT.md), but no live deployment is claimed here.
+
+**Jump to:** [Screenshots](#screenshots) · [Demo video](#demo-video) · [Architecture](#architecture) · [Features](#features) · [Run it](#installation) · [Gnani integration](#gnani-ai-integration) · [Tests](#testing) · [Limitations](#known-limitations)
+
+<p align="center">
+  <img src="docs/screenshots/landing.png" alt="MandiMitra AI landing page showing a spoken sale turning into a sale slip" width="860">
+</p>
+
+## Screenshots
+
+Screenshots of the running application. The app screens use the synthetic demo account, so every name and amount is made up.
+
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="docs/screenshots/review.png" alt="Review step: the sale slip filled from the spoken sentence with the calculation and read-back panel" width="100%">
+      <br><sub><b>Review and confirm.</b> The spoken sale becomes a slip. The server calculates the net amount, Gnani Timbre reads it back, and nothing is saved until the box is ticked.</sub>
+    </td>
+    <td width="50%" valign="top">
+      <img src="docs/screenshots/detail.png" alt="Digital receipt with gross amount, commission, transport and net payable" width="100%">
+      <br><sub><b>Receipt.</b> Itemised deductions and net payable, with print and PDF. It states that it is a personal record, not proof of payment.</sub>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="docs/screenshots/dashboard.png" alt="Dashboard showing money still to be paid, received, total sales and recent sales" width="100%">
+      <br><sub><b>Dashboard.</b> What is still owed, what has come in, recent sales, and a box to ask questions such as "Mera kitna paisa pending hai?".</sub>
+    </td>
+    <td width="50%" valign="top">
+      <img src="docs/screenshots/analytics.png" alt="Analytics with a 12-month sales trend, sales by crop and payment status" width="100%">
+      <br><sub><b>Analytics.</b> Twelve-month trend, sales by crop and payment status, all calculated from the recorded sales.</sub>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center">
+      <img src="docs/screenshots/mobile-record.png" alt="Record a sale on a phone, with the example sentence and the large microphone button" width="280">
+      <br><sub><b>On a phone.</b> The record screen at phone width, with the example sentence to say and the large microphone button.</sub>
+    </td>
+  </tr>
+</table>
+
+<sub>Note: these screenshots were captured before a Gnani key was connected, so the header badge reads "Gnani AI not configured" in some of them. With a key set, it shows "Gnani AI connected".</sub>
+
+## Demo video
+
+> **Demo video:** _to be added._ <!-- Replace this line with: [Watch the 2 to 3 minute demo](PUBLIC_VIDEO_URL) -->
+
+A written walkthrough is in [DEMO_SCRIPT.md](DEMO_SCRIPT.md).
 
 ## The problem
 
@@ -31,11 +78,20 @@ Most mandi sales are still recorded in paper *bahi-khatas* or not at all. Commis
 | Help and onboarding | A labelled "How it works" section on the landing page (with a "Try it in 30 seconds" guide), a public guide at `/help` and an in-app guide at `/app/help` (first-sale steps, example sentences in Hindi, Hinglish and English, microphone troubleshooting, page guide, FAQ), and a first-time hint on an empty dashboard that disappears after the first sale. The example sentences are shared constants, and an API test checks the extractor understands every one. |
 | Security | Helmet, CORS allowlist, rate limits (per user for Gnani calls), bcrypt, HS256 JWT with server-side logout, strict Zod validation and safe errors. The Gnani key lives only on the backend. |
 
-| Dashboard | Review slip | Receipt |
-|---|---|---|
-| ![](docs/screenshots/dashboard.png) | ![](docs/screenshots/review.png) | ![](docs/screenshots/detail.png) |
-
 ## Architecture
+
+```mermaid
+flowchart LR
+    U["React frontend<br/>(Vite, records WAV)"] -->|"audio, JSON"| A["Express API<br/>(Node 22)"]
+    A -->|"speech to text"| P["Gnani Prisma STT"]
+    A --> E["Deterministic extraction<br/>+ decimal.js maths"]
+    A -->|"read-back audio"| T["Gnani Timbre TTS"]
+    A -->|"confirmed sales,<br/>payments"| M[("MongoDB")]
+```
+
+The Gnani key stays on the API. The browser never talks to Gnani, and the AI never calculates money.
+
+Request flow in detail:
 
 ```
 Browser (React + Vite)                 API (Express 5, Node 22)                     External
@@ -62,7 +118,7 @@ See [ARCHITECTURE.md](ARCHITECTURE.md) for details and [API_DOCUMENTATION.md](AP
 Requirements: Node.js **20.19+** (22 recommended), npm 10+, and MongoDB (local, Docker, or Atlas).
 
 ```bash
-git clone <your-repo-url> MandiMitra-AI
+git clone https://github.com/JiteshJain123/MandiMitra-AI.git
 cd MandiMitra-AI
 npm install
 cp apps/api/.env.example apps/api/.env      # then edit it (see below)
