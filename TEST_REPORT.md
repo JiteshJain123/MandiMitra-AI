@@ -242,3 +242,23 @@ ESLint 0 problems; `tsc` 0 errors; API tests 106/106; web tests 48/48; Playwrigh
 - **Production-topology rehearsal** (built API with `NODE_ENV=production` and the built frontend on a different origin, throwaway database, real Gnani): 41-check user journey passed, including CORS allow and deny, safe error responses and the demo-mode switch.
 - **Database**: the Atlas inventory was read-only. A backup and a dry-run cleanup script exist; nothing was deleted or changed.
 - **Not done**: the real Render, Vercel and Atlas environments have not been deployed or tested, so no live-site result exists yet.
+
+## Fresh public repository verification (2026-11-14)
+
+The project was re-created as a new repository with a fresh history, so it was installed and tested again from scratch in the new folder.
+
+| Check | Result |
+|---|---|
+| `npm ci` | 535 packages installed |
+| ESLint (web, API and shared) | 0 problems |
+| Type check | 0 errors |
+| Web unit tests | **48 / 48 passed** (10 files) |
+| API tests | **106 / 106 passed** (9 files) |
+| Playwright end-to-end tests | **10 passed, 0 failed, 0 skipped** (installed Chrome, mock Gnani) |
+| Production builds | Web and API pass |
+| `npm audit --omit=dev` | 0 vulnerabilities |
+| GitHub Actions on the first pushed commit | `CI` and `Deploy` both concluded successfully. `Deploy` skipped every step because no deployment secrets are configured, so nothing was deployed. |
+
+One environment issue, not an application defect: the first API test run failed in three files with a MongoDB "available disk space is less than required minimum" error, because the drive was nearly full. After freeing disk space the same suite passed 106 / 106.
+
+GitHub Actions results for commits pushed after the first one were not checked when this was written.
