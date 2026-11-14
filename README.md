@@ -248,6 +248,6 @@ Step-by-step guide with the exact environment variables, CORS rule and verificat
 
 ## Project documents
 
-[SUBMISSION.md](SUBMISSION.md) · [PITCH.md](PITCH.md) · [DEPLOYMENT.md](DEPLOYMENT.md) · [PROJECT_PLAN.md](PROJECT_PLAN.md) · [ARCHITECTURE.md](ARCHITECTURE.md) · [API_DOCUMENTATION.md](API_DOCUMENTATION.md) · [TEST_REPORT.md](TEST_REPORT.md) · [DEMO_SCRIPT.md](DEMO_SCRIPT.md)
+[SUBMISSION.md](SUBMISSION.md) · [PITCH.md](PITCH.md) · [DEVELOPMENT_TIMELINE.md](DEVELOPMENT_TIMELINE.md) · [DEPLOYMENT.md](DEPLOYMENT.md) · [PROJECT_PLAN.md](PROJECT_PLAN.md) · [ARCHITECTURE.md](ARCHITECTURE.md) · [API_DOCUMENTATION.md](API_DOCUMENTATION.md) · [TEST_REPORT.md](TEST_REPORT.md) · [DEMO_SCRIPT.md](DEMO_SCRIPT.md)
 
 Fonts: Noto Sans and Noto Sans Devanagari (SIL Open Font License, see `apps/api/assets/fonts/OFL-LICENSE.txt`) and IBM Plex Sans (OFL).
