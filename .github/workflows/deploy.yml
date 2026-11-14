@@ -1,0 +1,61 @@
+name: Deploy
+
+# Runs only after CI succeeds on main. All credentials come from repository secrets;
+# nothing secret is written in this file. Steps are skipped when their secrets are not set.
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    if: github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    environment: production
+    env:
+      RENDER_DEPLOY_HOOK_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      BACKEND_URL: ${{ vars.BACKEND_URL }}
+      FRONTEND_URL: ${{ vars.FRONTEND_URL }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+
+      - name: Trigger backend deploy (Render)
+        if: env.RENDER_DEPLOY_HOOK_URL != ''
+        run: curl -fsS -X POST "$RENDER_DEPLOY_HOOK_URL" > /dev/null && echo "Render deploy triggered"
+
+      - uses: actions/setup-node@v4
+        if: env.VERCEL_TOKEN != ''
+        with:
+          node-version: '22'
+
+      - name: Deploy frontend (Vercel)
+        if: env.VERCEL_TOKEN != ''
+        working-directory: apps/web
+        run: |
+          npx vercel@latest pull --yes --environment=production --token="$VERCEL_TOKEN"
+          npx vercel@latest build --prod --token="$VERCEL_TOKEN"
+          npx vercel@latest deploy --prebuilt --prod --token="$VERCEL_TOKEN"
+
+      - name: Wait for backend health
+        if: env.BACKEND_URL != ''
+        run: |
+          for i in $(seq 1 30); do
+            if curl -fsS "$BACKEND_URL/api/health" | tee /tmp/health.json | grep -q '"database":"up"'; then
+              echo "Backend healthy"; cat /tmp/health.json; exit 0
+            fi
+            sleep 20
+          done
+          echo "Backend did not become healthy in time"; exit 1
+
+      - name: Check frontend responds
+        if: env.FRONTEND_URL != ''
+        run: curl -fsS -o /dev/null -w "%{http_code}\n" "$FRONTEND_URL"

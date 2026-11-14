@@ -1,0 +1,106 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: '22'
+
+jobs:
+  quality:
+    name: Lint, typecheck, unit + API tests, build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: 1. Install dependencies
+        run: npm ci
+
+      - name: Build shared package
+        run: npm run build:shared
+
+      - name: 2. Frontend lint
+        run: npx eslint apps/web
+
+      - name: 3. Backend lint
+        run: npx eslint apps/api packages/shared
+
+      - name: 4. TypeScript checks
+        run: |
+          npx tsc -p apps/api/tsconfig.json --noEmit
+          npx tsc -p apps/web/tsconfig.json --noEmit
+
+      - name: 5. Frontend unit tests
+        run: npm test -w @mandimitra/web
+
+      - name: Cache MongoDB test binary
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/mongodb-binaries
+          key: mongodb-binaries-${{ runner.os }}-v8
+
+      - name: 6 + 7. Backend unit tests and API integration tests (Gnani mocked)
+        run: npm test -w @mandimitra/api
+
+      - name: 8. Build frontend
+        run: npm run build -w @mandimitra/web
+
+      - name: 9. Build backend
+        run: npm run build -w @mandimitra/api
+
+      - name: Check build output contains no secrets
+        run: |
+          if grep -rE "GNANI_API_KEY|X-API-Key-ID|JWT_SECRET" apps/web/dist; then
+            echo "Secret-related strings found in frontend bundle" && exit 1
+          fi
+
+      - name: 10. Dependency security audit
+        run: npm audit --omit=dev --audit-level=high
+
+  e2e:
+    name: Playwright end-to-end (mock Gnani)
+    needs: quality
+    runs-on: ubuntu-latest
+    services:
+      mongo:
+        image: mongo:8
+        ports: ['27017:27017']
+        options: >-
+          --health-cmd "mongosh --quiet --eval 'db.runCommand({ ping: 1 })'"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - run: npm run build:shared
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+        working-directory: apps/web
+      - name: Run E2E tests
+        run: npx playwright test
+        working-directory: apps/web
+        env:
+          CI: 'true'
+          E2E_MONGODB_URI: mongodb://127.0.0.1:27017/mandimitra-e2e
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: apps/web/playwright-report
+          retention-days: 7
