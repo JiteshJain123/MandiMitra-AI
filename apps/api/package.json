@@ -1,0 +1,41 @@
+{
+  "name": "@mandimitra/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "tsx watch --env-file-if-exists=.env src/server.ts",
+    "build": "tsc -p tsconfig.build.json",
+    "start": "node dist/server.js",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "seed:demo": "tsx --env-file-if-exists=.env src/scripts/seed-demo.ts",
+    "smoke:gnani": "tsx --env-file-if-exists=.env src/scripts/smoke-gnani.ts",
+    "doctor": "tsx --env-file-if-exists=.env src/scripts/doctor.ts"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/multer": "^2.3.0",
+    "@types/pdfkit": "^0.17.7",
+    "@types/supertest": "^7.2.1",
+    "mongodb-memory-server": "^11.3.0",
+    "supertest": "^7.3.2",
+    "tsx": "^4.23.15"
+  },
+  "dependencies": {
+    "@mandimitra/shared": "0.1.0",
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "decimal.js": "^10.6.0",
+    "express": "^5.3.0",
+    "express-rate-limit": "^8.7.4",
+    "helmet": "^8.3.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.12.1",
+    "multer": "^2.5.0",
+    "pdfkit": "^0.20.2"
+  }
+}
