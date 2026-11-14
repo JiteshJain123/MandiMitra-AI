@@ -1,0 +1,16 @@
+node_modules/
+dist/
+coverage/
+*.log
+.env
+.env.*
+!.env.example
+.DS_Store
+playwright-report/
+test-results/
+apps/api/uploads/
+*.tsbuildinfo
+smoke-output/
+apps/web/playwright/.cache/
+*.whl
+doctor-output/
