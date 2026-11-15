@@ -1,19 +1,18 @@
-# MandiMitra AI: submission for the Great Indian AI Internship Challenge
+# MandiMitra AI: Submission for the Great Indian AI Internship Challenge
 
 **Your voice. Your transactions. Your digital records.**
 
 ## Links
 
-| | |
+| Resource | Link |
 |---|---|
-| Source code | https://github.com/JiteshJain123/MandiMitra-AI (public repository) |
-| Live site | _to be added after deployment_ |
-| Live API health | _to be added after deployment_ (`/api/health`) |
-| One-page pitch (required by the form) | [PITCH.md](PITCH.md) |
-| Demo video | _to be added_ (the form asks for 2 to 3 minutes; script: [DEMO_SCRIPT.md](DEMO_SCRIPT.md), cut it to fit) |
-| Public post (LinkedIn or X) | _to be added_ (tag Gnani AI, #GnaniAI #GreatIndianAIInternshipChallenge) |
+| Source code | [GitHub Repository](https://github.com/JiteshJain123/MandiMitra-AI) |
+| Demo video | [Watch MandiMitra AI Demo](https://youtu.be/eWOlTUGT_gc) |
+| Public post | [LinkedIn Project Announcement](https://lnkd.in/p/gSGjv3UK) |
+| One-page pitch | [PITCH.md](PITCH.md) |
+| Demo script | [DEMO_SCRIPT.md](DEMO_SCRIPT.md) |
 
-Nothing in this file claims a deployment exists. Update the two "to be added" rows after following [DEPLOYMENT.md](DEPLOYMENT.md) and testing the live site.
+**Deployment status:** MandiMitra AI is demonstrated using a locally running application. A public live deployment is not currently available.
 
 ## The problem
 
@@ -23,12 +22,12 @@ Most mandi sales are still written in a paper *bahi-khata* or not recorded at al
 
 A farmer, trader or mandi worker **speaks a sale** in Hindi, Hinglish or English. MandiMitra:
 
-1. records the voice in the browser and transcribes it with **Gnani Prisma**;
-2. fills in a sale slip (crop, quantity, unit, rate, commission, transport and other deductions) and shows, next to each field, the exact words it heard. Anything it did not hear is left empty and highlighted; it never guesses;
-3. calculates the amounts **on the server** to the paisa;
-4. reads the result back in the user's language with **Gnani Timbre**;
-5. saves only after the user explicitly confirms, then issues a receipt (print or PDF);
-6. tracks payments (full and part) until the sale is paid, and answers questions such as "Mera kitna paisa pending hai?" by voice or text.
+1. Records the voice in the browser and transcribes it with **Gnani Prisma**.
+2. Fills in a sale slip (crop, quantity, unit, rate, commission, transport and other deductions) and shows, next to each field, the exact words it heard. Anything it did not hear is left empty and highlighted; it never guesses.
+3. Calculates the amounts **on the server** to the paisa.
+4. Reads the result back in the user's language with **Gnani Timbre**.
+5. Saves only after the user explicitly confirms, then issues a receipt (print or PDF).
+6. Tracks payments (full and part) until the sale is paid, and answers questions such as "Mera kitna paisa pending hai?" by voice or text.
 
 ## Features
 
@@ -39,6 +38,7 @@ Voice capture in the browser (16 kHz WAV, timer, cancel, 29 second limit, upload
 All Gnani calls are made by the **backend**. The key lives only in the API's environment, is never sent to the browser, never logged, and never appears in the production bundle (checked).
 
 **Speech to text: Gnani Prisma** (`prisma-v3.0`, REST)
+
 - `POST https://api.vachana.ai/stt/v3`, `multipart/form-data`, header `X-API-Key-ID`.
 - Language: Hindi `hi-IN`; Hinglish `hi-IN,en-IN` (two codes together); English `en-IN`; plus `indic-auto` automatic detection and the other Indian languages.
 - `format=transcribe`, which applies inverse text normalisation, so spoken numbers come back as digits ("पचास क्विंटल" becomes "50 quintal"). Mandi vocabulary is passed as `keyterms`.
@@ -46,12 +46,13 @@ All Gnani calls are made by the **backend**. The key lives only in the API's env
 - All documented error shapes (401, 402, 403, 422, 429, 504 and so on) are mapped to readable messages with no upstream text or key leaked.
 
 **Text to speech: Gnani Timbre** (`timbre-v2.5`, REST)
+
 - `POST https://api.vachana.ai/api/v1/tts/inference`, JSON, returns **binary audio** that the API passes to the browser unchanged.
 - One voice per language from the Timbre v2.5 catalogue (for example Nalini for Hindi, Poorvi for Hinglish, Devika for English). The summary text is generated from templates in Hindi, Hinglish or English.
 
 **Deliberately not used:** Evon, and any language model. Extraction is deterministic and testable, and never invents a value. Questions map to a fixed list of safe queries; no AI-written database query is ever executed.
 
-**Accuracy honesty:** the automated tests mock Gnani. The live checks used Timbre-generated speech fed through Prisma (the same three sentences, all extracted correctly) and a real person's manual microphone test. Accuracy for accents and noisy mandi audio has **not** been measured.
+**Accuracy honesty:** The automated tests mock Gnani. The live checks used Timbre-generated speech fed through Prisma (the same three sentences, all extracted correctly) and a real person's manual microphone test. Accuracy for accents and noisy mandi audio has **not** been measured.
 
 ## Trust and safety decisions
 
@@ -69,7 +70,7 @@ Architecture and the voice flow step by step: [ARCHITECTURE.md](ARCHITECTURE.md)
 
 ## Run it locally
 
-`npm install`, copy `apps/api/.env.example` to `apps/api/.env` and fill it in, then `npm run dev:api` and `npm run dev:web`; open http://localhost:5173. Details in the [README](README.md). `npm run doctor` checks the configuration and the database without printing any secret.
+`npm install`, copy `apps/api/.env.example` to `apps/api/.env` and fill it in, then `npm run dev:api` and `npm run dev:web`; open `http://localhost:5173`. Details in the [README](README.md). `npm run doctor` checks the configuration and the database without printing any secret.
 
 ## Evidence
 
@@ -86,3 +87,10 @@ Test results, what was verified and how: [TEST_REPORT.md](TEST_REPORT.md). Headl
 - Accessibility was checked with automated and keyboard-driven audits only, not with a screen reader. Safari, Firefox and real phones were not tested.
 - The Render free plan sleeps when idle, so the first request after a pause is slow.
 - No official challenge brief was available in the project when this document was written, so coverage of every challenge requirement has **not** been checked against it.
+
+## Submission status
+
+- Demo video published on YouTube.
+- Project announcement published on LinkedIn.
+- Official challenge submission form submitted.
+- Public source code available on GitHub.
