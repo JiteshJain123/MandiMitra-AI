@@ -3,18 +3,18 @@
 <p align="center"><b>Your voice. Your transactions. Your digital records.</b></p>
 
 <p align="center">
-  Voice-first sale records for farmers, traders and mandi workers.<br>
-  Built by <a href="https://github.com/JiteshJain123">Jitesh Jain</a> for the Great Indian AI Internship Challenge, with AI coding assistance.
+  <a href="https://mandi-mitra-ai-rho.vercel.app/" target="_blank">🚀 Live Demo</a> ·
+  <a href="https://github.com/JiteshJain123/MandiMitra-AI" target="_blank">💻 GitHub Repository</a>
 </p>
 
 <p align="center">
-  <a href="#screenshots">Screenshots</a> ·
-  <a href="#architecture">Architecture</a> ·
-  <a href="#features">Features</a> ·
-  <a href="#installation">Run it</a> ·
-  <a href="#gnani-ai-integration">Gnani integration</a> ·
-  <a href="#testing">Tests</a> ·
-  <a href="#known-limitations">Limitations</a>
+  <a href="#screenshots">Screenshots</a> ·
+  <a href="#architecture">Architecture</a> ·
+  <a href="#features">Features</a> ·
+  <a href="#installation">Run it</a> ·
+  <a href="#gnani-ai-integration">Gnani integration</a> ·
+  <a href="#testing">Tests</a> ·
+  <a href="#known-limitations">Limitations</a>
 </p>
 
 MandiMitra AI is a voice-first transaction assistant for farmers, traders and mandi workers in India. You speak a sale in Hindi, Hinglish or English. The app transcribes it with **Gnani Prisma**, fills in a sale slip, calculates commission and deductions to the paisa on the server, reads the result back with **Gnani Timbre**, and saves it only after you confirm. It then issues a receipt and tracks the payment until it is paid.
@@ -26,36 +26,36 @@ MandiMitra AI is a voice-first transaction assistant for farmers, traders and ma
 Screenshots of the running application. The app screens use the synthetic demo account, so every name and amount is made up. Click an image to open it full size.
 
 <table>
-  <tr>
-    <td width="50%" align="center" valign="top">
-      <a href="docs/screenshots/dashboard.png"><img src="docs/screenshots/dashboard.png" alt="Dashboard showing money still to be paid, received, total sales and recent sales" width="400"></a>
-      <br><sub><b>Dashboard</b><br>What is still owed, what has come in, recent sales, and a box for questions such as "Mera kitna paisa pending hai?".</sub>
-    </td>
-    <td width="50%" align="center" valign="top">
-      <a href="docs/screenshots/mobile-record.png"><img src="docs/screenshots/mobile-record.png" alt="Voice recording screen on a phone with the example sentence and the large microphone button" width="160"></a>
-      <br><sub><b>Voice recording</b><br>Phone view: tap the microphone and say the sale in Hindi, Hinglish or English.</sub>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" align="center" valign="top">
-      <a href="docs/screenshots/review.png"><img src="docs/screenshots/review.png" alt="Review slip filled from the spoken sentence, with the calculation and read-back panel" width="400"></a>
-      <br><sub><b>Transaction review slip</b><br>The spoken sale becomes a slip. The server calculates the net amount and nothing is saved until the box is ticked.</sub>
-    </td>
-    <td width="50%" align="center" valign="top">
-      <a href="docs/screenshots/detail.png"><img src="docs/screenshots/detail.png" alt="Generated receipt with gross amount, commission, transport and net payable" width="400"></a>
-      <br><sub><b>Generated receipt</b><br>Itemised deductions and net payable, with print and PDF. A personal record, not proof of payment.</sub>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" align="center" valign="top">
-      <a href="docs/screenshots/payments.png"><img src="docs/screenshots/payments.png" alt="Payments page listing sales waiting for payment and the payment history" width="400"></a>
-      <br><sub><b>Payment tracking</b><br>Who still owes money, overdue sales and the payment history.</sub>
-    </td>
-    <td width="50%" align="center" valign="top">
-      <a href="docs/screenshots/analytics.png"><img src="docs/screenshots/analytics.png" alt="Analytics with a 12-month sales trend, sales by crop and payment status" width="400"></a>
-      <br><sub><b>Analytics</b><br>Twelve-month trend, sales by crop and payment status, from the recorded sales.</sub>
-    </td>
-  </tr>
+  <tr>
+    <td width="50%" align="center" valign="top">
+      <a href="docs/screenshots/dashboard.png"><img src="docs/screenshots/dashboard.png" alt="Dashboard showing money still to be paid, received, total sales and recent sales" width="400"></a>
+      <br><sub><b>Dashboard</b><br>What is still owed, what has come in, recent sales, and a box for questions such as "Mera kitna paisa pending hai?".</sub>
+    </td>
+    <td width="50%" align="center" valign="top">
+      <a href="docs/screenshots/mobile-record.png"><img src="docs/screenshots/mobile-record.png" alt="Voice recording screen on a phone with the example sentence and the large microphone button" width="160"></a>
+      <br><sub><b>Voice recording</b><br>Phone view: tap the microphone and say the sale in Hindi, Hinglish or English.</sub>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" align="center" valign="top">
+      <a href="docs/screenshots/review.png"><img src="docs/screenshots/review.png" alt="Review slip filled from the spoken sentence, with the calculation and read-back panel" width="400"></a>
+      <br><sub><b>Transaction review slip</b><br>The spoken sale becomes a slip. The server calculates the net amount and nothing is saved until the box is ticked.</sub>
+    </td>
+    <td width="50%" align="center" valign="top">
+      <a href="docs/screenshots/detail.png"><img src="docs/screenshots/detail.png" alt="Generated receipt with gross amount, commission, transport and net payable" width="400"></a>
+      <br><sub><b>Generated receipt</b><br>Itemised deductions and net payable, with print and PDF. A personal record, not proof of payment.</sub>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" align="center" valign="top">
+      <a href="docs/screenshots/payments.png"><img src="docs/screenshots/payments.png" alt="Payments page listing sales waiting for payment and the payment history" width="400"></a>
+      <br><sub><b>Payment tracking</b><br>Who still owes money, overdue sales and the payment history.</sub>
+    </td>
+    <td width="50%" align="center" valign="top">
+      <a href="docs/screenshots/analytics.png"><img src="docs/screenshots/analytics.png" alt="Analytics with a 12-month sales trend, sales by crop and payment status" width="400"></a>
+      <br><sub><b>Analytics</b><br>Twelve-month trend, sales by crop and payment status, from the recorded sales.</sub>
+    </td>
+  </tr>
 </table>
 
 <sub>These screenshots were captured before a Gnani key was connected, so the header badge reads "Gnani AI not configured" in most of them. With a key set it shows "Gnani AI connected".</sub>
@@ -89,20 +89,20 @@ The browser never talks to Gnani. The backend validates the audio, calls Gnani, 
 
 ```mermaid
 flowchart TD
-    FE["React + Vite frontend<br/>records 16 kHz WAV"]
-    API["Express / Node.js backend<br/>auth, validation, routes"]
-    STT["Gnani Prisma<br/>speech to text"]
-    EX["Deterministic extraction<br/>and calculation (decimal.js)"]
-    TTS["Gnani Timbre<br/>text to speech"]
-    DB[("MongoDB")]
+    FE["React + Vite frontend<br/>records 16 kHz WAV"]
+    API["Express / Node.js backend<br/>auth, validation, routes"]
+    STT["Gnani Prisma<br/>speech to text"]
+    EX["Deterministic extraction<br/>and calculation (decimal.js)"]
+    TTS["Gnani Timbre<br/>text to speech"]
+    DB[("MongoDB")]
 
-    FE -->|"1. recorded audio"| API
-    API <-->|"2. audio / transcript"| STT
-    API <-->|"3. transcript to fields and amounts"| EX
-    API -->|"4. slip with calculated amounts"| FE
-    API <-->|"5. read-back text / audio"| TTS
-    FE -->|"6. user confirms (Idempotency-Key)"| API
-    API -->|"7. saved only after confirmation"| DB
+    FE -->|"1. recorded audio"| API
+    API <-->|"2. audio / transcript"| STT
+    API <-->|"3. transcript to fields and amounts"| EX
+    API -->|"4. slip with calculated amounts"| FE
+    API <-->|"5. read-back text / audio"| TTS
+    FE -->|"6. user confirms (Idempotency-Key)"| API
+    API -->|"7. saved only after confirmation"| DB
 ```
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) for details and [API_DOCUMENTATION.md](API_DOCUMENTATION.md) for every endpoint.
@@ -123,8 +123,8 @@ Requirements: Node.js **20.19+** (22 recommended), npm 10+, and MongoDB (local, 
 git clone https://github.com/JiteshJain123/MandiMitra-AI.git
 cd MandiMitra-AI
 npm install
-cp apps/api/.env.example apps/api/.env      # then edit it (see below)
-cp apps/web/.env.example apps/web/.env      # optional; empty is fine for local dev
+cp apps/api/.env.example apps/api/.env      # then edit it (see below)
+cp apps/web/.env.example apps/web/.env      # optional; empty is fine for local dev
 ```
 
 On Windows PowerShell, use `Copy-Item apps/api/.env.example apps/api/.env`.
@@ -157,8 +157,8 @@ Frontend (`apps/web/.env`): `VITE_API_BASE_URL` is empty in development (Vite pr
 # MongoDB, if you don't have one running:
 docker run -d --name mandimitra-mongo -p 27017:27017 mongo:8
 
-npm run dev:api     # http://localhost:4000  (terminal 1)
-npm run dev:web     # http://localhost:5173  (terminal 2)
+npm run dev:api     # http://localhost:4000  (terminal 1)
+npm run dev:web     # http://localhost:5173  (terminal 2)
 ```
 
 Open http://localhost:5173 and click **Try the demo account**, or register. The microphone needs `localhost` or HTTPS.
@@ -192,7 +192,7 @@ All documented error shapes (401, 402, 403, 422, 429, 504 and so on) map to clea
 
 ```bash
 npm run smoke:gnani -- --yes
-npm run smoke:gnani -- --yes --audio path/to/your-recording.wav   # also transcribe your own clip
+npm run smoke:gnani -- --yes --audio path/to/your-recording.wav   # also transcribe your own clip
 ```
 
 This generates Hindi, Hinglish and English speech with Timbre, feeds it back through Prisma (including `indic-auto`), runs extraction, checks that an invalid key is rejected, and writes `smoke-output/results.json`. A transcription step passes only if the transcript contains the spoken numbers and every extracted field matches the expected value. It reports only what it observed.
@@ -208,10 +208,10 @@ Summary (full details in [API_DOCUMENTATION.md](API_DOCUMENTATION.md)):
 ## Testing
 
 ```bash
-npm test                          # shared build + web unit tests + API unit/integration tests
-npm run test -w @mandimitra/api   # 106 tests; Supertest against a real mongod, Gnani mocked at fetch()
-npm run test -w @mandimitra/web   # 48 tests
-cd apps/web && npx playwright install chromium && npx playwright test   # 10 E2E tests (needs MongoDB on localhost)
+npm test                          # shared build + web unit tests + API unit/integration tests
+npm run test -w @mandimitra/api   # 106 tests; Supertest against a real mongod, Gnani mocked at fetch()
+npm run test -w @mandimitra/web   # 48 tests
+cd apps/web && npx playwright install chromium && npx playwright test   # 10 E2E tests (needs MongoDB on localhost)
 ```
 
 Automated tests never call the real Gnani API. E2E runs the real web app and API against `apps/web/e2e/mock-gnani.mjs`, which returns the documented response shapes. Results are in [TEST_REPORT.md](TEST_REPORT.md).
@@ -224,9 +224,9 @@ Step-by-step guide with the exact environment variables, CORS rule and verificat
 
 **Backend (Render):**
 1. New → Blueprint, then select this repo. `render.yaml` defines the service. Alternatively, create a Web Service with:
-   - Build: `npm ci && npm run build:shared && npm run build -w @mandimitra/api`
-   - Start: `node apps/api/dist/server.js`
-   - Health check: `/api/health`
+   - Build: `npm ci && npm run build:shared && npm run build -w @mandimitra/api`
+   - Start: `node apps/api/dist/server.js`
+   - Health check: `/api/health`
 2. Set the environment variables `MONGODB_URI`, `GNANI_API_KEY` and `CORS_ORIGINS` (your Vercel URL). `JWT_SECRET` is generated automatically.
 
 **Frontend (Vercel):**
